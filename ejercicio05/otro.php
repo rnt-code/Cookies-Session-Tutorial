@@ -1,24 +1,31 @@
 <?php
     if(isset($_COOKIE['color'])) {
+        echo"<br>Cookie activada en el if";
         $color = $_POST["color"];
         $arr_cookie_options = [
-            "expires" => time() + 364*24*60*60,
+            "expires" => time() + 2000,
             "path" => "/",
             "domain" => "localhost",
             "secure" => true,
             "httponly" => true,
             "samesite" => "None" //None || Lax || Strict
         ];
-        setcookie("color", $color, $arr_cookie_options);
+        setcookie('color', $color, $arr_cookie_options);
     }
     else {
-        if(isset($_COOKIE['color'])) {
-            $color = $_COOKIE['color'];
-        }
-        else {
-            $color ='white';
-        }
+        $color = 'white';
+        $arr_cookie_options = [
+            "expires" => time() + 2000,
+            "path" => "/",
+            "domain" => "localhost",
+            "secure" => true,
+            "httponly" => true,
+            "samesite" => "None" //None || Lax || Strict
+        ];
+        setcookie('color', $color, $arr_cookie_options);
+        echo"<br>Cookie activada en el else";
     }
+
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -43,6 +50,6 @@
         <br>
         <input type="submit" value="Cambiar color!">
     </form>
-
+    <a href="kill.php">Matar la cookie</a>
 </body>
 </html>
